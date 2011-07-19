@@ -36,6 +36,11 @@ class Growl
     self
   end
   
+  def sound(sound)
+    @sound = sound
+    self
+  end 
+  
   def to_s
     command = COMMAND.clone
     command << " --title '#{@title}'" if @title
@@ -44,6 +49,7 @@ class Growl
       variable = instance_variable_get("@#{option}")
       command << " --#{option} #{variable}" if variable
     end
+    command << " && afplay #{@sound}" if @sound
     command
   end
   
